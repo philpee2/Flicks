@@ -13,6 +13,7 @@ import MBProgressHUD
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var networkErrorView: UIView!
 
     var movies: [NSDictionary]!
     var endpoint: String!
@@ -45,6 +46,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let task: NSURLSessionDataTask = session.dataTaskWithRequest(request,
              completionHandler: { (dataOrNil, response, error) in
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
+                if error != nil {
+                    self.networkErrorView.hidden = false
+                }
                 if let data = dataOrNil {
                     if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
                         data, options:[]) as? NSDictionary {

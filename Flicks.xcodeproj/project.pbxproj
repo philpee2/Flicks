@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041F8E8E1D513EB40031BC44 /* MovieGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F8E8D1D513EB30031BC44 /* MovieGridCell.swift */; };
 		042399041D505383007370BA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042399031D505383007370BA /* DetailViewController.swift */; };
 		04C5035D1D5039170039FAAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C5035C1D5039170039FAAB /* AppDelegate.swift */; };
 		04C503621D5039170039FAAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04C503601D5039170039FAAB /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		041F8E8D1D513EB30031BC44 /* MovieGridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieGridCell.swift; sourceTree = "<group>"; };
 		042399031D505383007370BA /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		04C503591D5039170039FAAB /* Flicks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flicks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04C5035C1D5039170039FAAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				04C503711D5041140039FAAB /* MovieCell.swift */,
+				041F8E8D1D513EB30031BC44 /* MovieGridCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 			files = (
 				04C5035D1D5039170039FAAB /* AppDelegate.swift in Sources */,
 				04C5036F1D5039B50039FAAB /* MoviesViewController.swift in Sources */,
+				041F8E8E1D513EB40031BC44 /* MovieGridCell.swift in Sources */,
 				04C503721D5041140039FAAB /* MovieCell.swift in Sources */,
 				042399041D505383007370BA /* DetailViewController.swift in Sources */,
 			);

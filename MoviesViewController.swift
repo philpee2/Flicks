@@ -10,10 +10,15 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+let LIST_VIEW = 0
+let GRID_VIEW = 1
+
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var networkErrorView: UIView!
+    @IBOutlet weak var viewTypeControl: UISegmentedControl!
 
     var movies: [NSDictionary]!
     var endpoint: String!
@@ -42,12 +47,17 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
         tableView.delegate = self
         tableView.dataSource = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
+
         let refreshControl = UIRefreshControl()
         // QUESTION: What is going on here? Why does it require @objc in front of fetchData?
         refreshControl.addTarget(self, action: #selector(fetchData(_:)), forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(refreshControl, atIndex: 0)
 
         fetchData(refreshControl)
+
+        displayMovies(viewTypeControl.selectedSegmentIndex)
 
         // Do any additional setup after loading the view.
     }
@@ -60,6 +70,32 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         self.movies = movies
         self.searchText = searchText
         tableView.reloadData()
+        collectionView.reloadData()
+    }
+
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return filtered.count
+    }
+
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieGridCell", forIndexPath: indexPath) as! MovieGridCell
+        let movie = movies[indexPath.row]
+        
+        if let posterPath = (movie["poster_path"] as? String) {
+            setPosterImage(posterPath, posterView: cell.posterImageView)
+        }
+        return cell
+    }
+
+    private func displayMovies(viewType: Int) {
+        if (viewType == LIST_VIEW) {
+            tableView.hidden = false
+            collectionView.hidden = true
+        } else if (viewType == GRID_VIEW) {
+            tableView.hidden = true
+            collectionView.hidden = false
+        }
     }
 
     @objc private func fetchData(refreshControl: UIRefreshControl) {
@@ -106,17 +142,20 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
-
         let movie = filtered[indexPath.row]
-        let baseImageUrl = "http://image.tmdb.org/t/p/w500"
         if let posterPath = movie["poster_path"] as? String {
-            let imageUrl = NSURL(string: baseImageUrl + posterPath)
-            cell.posterView.setImageWithURL(imageUrl!)
+            setPosterImage(posterPath, posterView: cell.posterView)
         }
 
         cell.titleLabel.text = movie["title"] as? String
         cell.overviewLabel.text = movie["overview"] as? String
         return cell
+    }
+    
+    private func setPosterImage(posterPath: String, posterView: UIImageView) {
+        let baseImageUrl = "http://image.tmdb.org/t/p/w500"
+        let imageUrl = NSURL(string: baseImageUrl + posterPath)
+        posterView.setImageWithURL(imageUrl!)
     }
 
 
@@ -124,10 +163,21 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let cell = sender as! UITableViewCell
-        let indexPath = tableView.indexPathForCell(cell)
-        let movie = filtered[indexPath!.row]
         let detailViewController = segue.destinationViewController as! DetailViewController
+        let viewType = viewTypeControl.selectedSegmentIndex
+        let movie: NSDictionary
+        if viewType == LIST_VIEW {
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)
+            movie = movies[indexPath!.row]
+        } else {
+            let cell = sender as! UICollectionViewCell
+            let indexPath = collectionView.indexPathForCell(cell)
+            movie = movies[indexPath!.row]
+        }
         detailViewController.movie = movie
+    }
+    @IBAction func viewTypeChanged(sender: AnyObject) {
+        displayMovies(viewTypeControl.selectedSegmentIndex)
     }
 }

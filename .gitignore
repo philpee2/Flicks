@@ -87,3 +87,6 @@ xcuserdata/
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+
+Flicks.xcodeproj/xcuserdata/phil_nachum.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+Flicks.xcworkspace/xcuserdata/phil_nachum.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist

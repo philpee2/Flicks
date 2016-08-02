@@ -22,13 +22,17 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        let refreshControl = UIRefreshControl()
+        // QUESTION: What is going on here? Why does it require @objc in front of fetchData?
+        refreshControl.addTarget(self, action: #selector(fetchData(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
 
-        fetchData()
+        fetchData(refreshControl)
 
         // Do any additional setup after loading the view.
     }
 
-    private func fetchData() {
+    @objc private func fetchData(refreshControl: UIRefreshControl) {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
         let url = NSURL(string: "https://api.themoviedb.org/3/movie/\(endpoint)?api_key=\(apiKey)")
@@ -46,6 +50,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let task: NSURLSessionDataTask = session.dataTaskWithRequest(request,
              completionHandler: { (dataOrNil, response, error) in
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
+                refreshControl.endRefreshing()
                 if error != nil {
                     self.networkErrorView.hidden = false
                 }
@@ -55,6 +60,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                         print("response: \(responseDictionary)")
                         self.movies = responseDictionary["results"] as! [NSDictionary]
                         self.tableView.reloadData()
+                        self.networkErrorView.hidden = true
                     }
                 }
         })

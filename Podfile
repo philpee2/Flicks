@@ -5,6 +5,7 @@ target 'Flicks' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
     pod 'AFNetworking'
+    pod 'MBProgressHUD'
 
   # Pods for Flicks
 

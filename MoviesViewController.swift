@@ -8,7 +8,7 @@
 
 import UIKit
 import AFNetworking
-
+import MBProgressHUD
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -28,6 +28,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
     private func fetchData() {
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
         let url = NSURL(string: "https://api.themoviedb.org/3/movie/\(endpoint)?api_key=\(apiKey)")
         let request = NSURLRequest(
@@ -43,6 +44,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
         let task: NSURLSessionDataTask = session.dataTaskWithRequest(request,
              completionHandler: { (dataOrNil, response, error) in
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
                 if let data = dataOrNil {
                     if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
                         data, options:[]) as? NSDictionary {
@@ -73,7 +75,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             let imageUrl = NSURL(string: baseImageUrl + posterPath)
             cell.posterView.setImageWithURL(imageUrl!)
         }
-        
+
         cell.titleLabel.text = movie["title"] as? String
         cell.overviewLabel.text = movie["overview"] as? String
         return cell

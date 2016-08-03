@@ -87,6 +87,13 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         }
         return cell
     }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let width = collectionView.frame.width / 3
+        // Roughly the ratio of a movie poster
+        let height = width / 0.65
+        return CGSize(width: width, height: height)
+    }
 
     private func displayMovies(viewType: Int) {
         if (viewType == LIST_VIEW) {

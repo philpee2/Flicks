@@ -10,16 +10,24 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var networkErrorView: UIView!
 
     var movies: [NSDictionary]!
+    var filtered: [NSDictionary]!
     var endpoint: String!
+    var searchBar: UISearchBar!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // QUESTION: This happens every time the view loads. That can't be right
+        searchBar = UISearchBar()
+        navigationItem.titleView = searchBar
+        searchBar.delegate = self
+
         tableView.delegate = self
         tableView.dataSource = self
         let refreshControl = UIRefreshControl()
@@ -30,6 +38,24 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         fetchData(refreshControl)
 
         // Do any additional setup after loading the view.
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        filtered = movies.filter({ (movie) -> Bool in
+            let title = (movie["title"] as? String)?.lowercaseString
+            let search = searchText.lowercaseString
+            if search.characters.count == 0 {
+                return true
+            }
+            if let title = title {
+                return title.rangeOfString(search) != nil
+            } else {
+                return false
+            }
+        })
+        
+        tableView.reloadData()
+        
     }
 
     @objc private func fetchData(refreshControl: UIRefreshControl) {
@@ -59,6 +85,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                         data, options:[]) as? NSDictionary {
                         print("response: \(responseDictionary)")
                         self.movies = responseDictionary["results"] as! [NSDictionary]
+                        self.filtered = self.movies
                         self.tableView.reloadData()
                         self.networkErrorView.hidden = true
                     }
@@ -73,13 +100,13 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies?.count ?? 0
+        return filtered?.count ?? 0
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
 
-        let movie = movies[indexPath.row]
+        let movie = filtered[indexPath.row]
         let baseImageUrl = "http://image.tmdb.org/t/p/w500"
         if let posterPath = movie["poster_path"] as? String {
             let imageUrl = NSURL(string: baseImageUrl + posterPath)

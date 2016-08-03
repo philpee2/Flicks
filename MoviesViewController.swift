@@ -16,9 +16,21 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var networkErrorView: UIView!
 
     var movies: [NSDictionary]!
-    var filtered: [NSDictionary]!
     var endpoint: String!
     var searchBar: UISearchBar!
+    var searchText: String!
+
+    var filtered: [NSDictionary] {
+        if let movies = movies {
+            return movies.filter { (movie) -> Bool in
+                let title = (movie["title"] as? String)?.lowercaseString ?? ""
+                let search = searchText.lowercaseString
+                return (search.characters.count == 0) || title.rangeOfString(search) != nil
+            }
+        } else {
+            return []
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,23 +51,15 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
         // Do any additional setup after loading the view.
     }
-    
+
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        filtered = movies.filter({ (movie) -> Bool in
-            let title = (movie["title"] as? String)?.lowercaseString
-            let search = searchText.lowercaseString
-            if search.characters.count == 0 {
-                return true
-            }
-            if let title = title {
-                return title.rangeOfString(search) != nil
-            } else {
-                return false
-            }
-        })
-        
+        updateMoviesData(movies, searchText: searchText)
+    }
+
+    private func updateMoviesData(movies: [NSDictionary], searchText: String) {
+        self.movies = movies
+        self.searchText = searchText
         tableView.reloadData()
-        
     }
 
     @objc private func fetchData(refreshControl: UIRefreshControl) {
@@ -83,10 +87,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                 if let data = dataOrNil {
                     if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
                         data, options:[]) as? NSDictionary {
-                        print("response: \(responseDictionary)")
-                        self.movies = responseDictionary["results"] as! [NSDictionary]
-                        self.filtered = self.movies
-                        self.tableView.reloadData()
+                        self.updateMoviesData(responseDictionary["results"] as! [NSDictionary], searchText: self.searchBar.text ?? "")
                         self.networkErrorView.hidden = true
                     }
                 }
@@ -100,7 +101,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filtered?.count ?? 0
+        return filtered.count
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

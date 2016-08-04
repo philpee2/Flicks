@@ -40,7 +40,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // QUESTION: This happens every time the view loads. That can't be right
         searchBar = UISearchBar()
         navigationItem.titleView = searchBar
         searchBar.delegate = self
@@ -51,7 +50,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         collectionView.dataSource = self
 
         let refreshControl = UIRefreshControl()
-        // QUESTION: What is going on here? Why does it require @objc in front of fetchData?
         refreshControl.addTarget(self, action: #selector(fetchData(_:)), forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(refreshControl, atIndex: 0)
 

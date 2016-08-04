@@ -72,6 +72,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         searchBar.showsCancelButton = false
         searchBar.endEditing(true)
         searchBar.text = ""
+        updateMoviesData(movies, searchText: "")
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {

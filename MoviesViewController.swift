@@ -61,6 +61,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
         // Do any additional setup after loading the view.
     }
+    
+    // Search bar methods
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         updateMoviesData(movies, searchText: searchText)
@@ -75,20 +77,15 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
     }
-
-    private func updateMoviesData(movies: [NSDictionary], searchText: String) {
-        self.movies = movies
-        self.searchText = searchText
-        tableView.reloadData()
-        collectionView.reloadData()
-    }
-
+    
+    // Collection view methods
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filtered.count
     }
-
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-
+        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieGridCell", forIndexPath: indexPath) as! MovieGridCell
         let movie = filtered[indexPath.row]
         
@@ -103,6 +100,31 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         // Roughly the ratio of a movie poster
         let height = width / 0.65
         return CGSize(width: width, height: height)
+    }
+    
+    // Table view methods
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filtered.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
+        let movie = filtered[indexPath.row]
+        if let posterPath = movie["poster_path"] as? String {
+            setPosterImage(posterPath, posterView: cell.posterView)
+        }
+        
+        cell.titleLabel.text = movie["title"] as? String
+        cell.overviewLabel.text = movie["overview"] as? String
+        return cell
+    }
+
+    private func updateMoviesData(movies: [NSDictionary], searchText: String) {
+        self.movies = movies
+        self.searchText = searchText
+        tableView.reloadData()
+        collectionView.reloadData()
     }
 
     private func displayMovies(viewType: Int) {
@@ -151,22 +173,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filtered.count
-    }
-
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
-        let movie = filtered[indexPath.row]
-        if let posterPath = movie["poster_path"] as? String {
-            setPosterImage(posterPath, posterView: cell.posterView)
-        }
-
-        cell.titleLabel.text = movie["title"] as? String
-        cell.overviewLabel.text = movie["overview"] as? String
-        return cell
     }
     
     private func setPosterImage(posterPath: String, posterView: UIImageView) {

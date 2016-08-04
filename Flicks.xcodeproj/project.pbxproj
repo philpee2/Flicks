@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		041F8E8E1D513EB40031BC44 /* MovieGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F8E8D1D513EB30031BC44 /* MovieGridCell.swift */; };
 		042399041D505383007370BA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042399031D505383007370BA /* DetailViewController.swift */; };
+		04B6A3E81D53BDC000A5F1C2 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B6A3E71D53BDC000A5F1C2 /* Common.swift */; };
 		04C5035D1D5039170039FAAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C5035C1D5039170039FAAB /* AppDelegate.swift */; };
 		04C503621D5039170039FAAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04C503601D5039170039FAAB /* Main.storyboard */; };
 		04C503641D5039170039FAAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04C503631D5039170039FAAB /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		041F8E8D1D513EB30031BC44 /* MovieGridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieGridCell.swift; sourceTree = "<group>"; };
 		042399031D505383007370BA /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		04B6A3E71D53BDC000A5F1C2 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		04C503591D5039170039FAAB /* Flicks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flicks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04C5035C1D5039170039FAAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04C503611D5039170039FAAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				04C503631D5039170039FAAB /* Assets.xcassets */,
 				04C503651D5039170039FAAB /* LaunchScreen.storyboard */,
 				04C503681D5039170039FAAB /* Info.plist */,
+				04B6A3E71D53BDC000A5F1C2 /* Common.swift */,
 			);
 			path = Flicks;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				041F8E8E1D513EB40031BC44 /* MovieGridCell.swift in Sources */,
 				04C503721D5041140039FAAB /* MovieCell.swift in Sources */,
 				042399041D505383007370BA /* DetailViewController.swift in Sources */,
+				04B6A3E81D53BDC000A5F1C2 /* Common.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

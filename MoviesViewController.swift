@@ -89,7 +89,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let movie = filtered[indexPath.row]
         
         if let posterPath = (movie["poster_path"] as? String) {
-            setPosterImage(posterPath, posterView: cell.posterImageView)
+            setImage(posterPath, posterView: cell.posterImageView)
         }
         return cell
     }
@@ -111,7 +111,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
         let movie = filtered[indexPath.row]
         if let posterPath = movie["poster_path"] as? String {
-            setPosterImage(posterPath, posterView: cell.posterView)
+            setImage(posterPath, posterView: cell.posterView)
         }
         
         cell.titleLabel.text = movie["title"] as? String
@@ -179,33 +179,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    private func setPosterImage(posterPath: String, posterView: UIImageView) {
-        
-        let baseImageUrl = "http://image.tmdb.org/t/p/w500"
-        let imageRequest = NSURLRequest(URL: NSURL(string: baseImageUrl + posterPath)!)
-        
-        posterView.setImageWithURLRequest(
-            imageRequest,
-            placeholderImage: nil,
-            success: { (imageRequest, imageResponse, image) -> Void in
-                
-                // imageResponse will be nil if the image is cached
-                if imageResponse != nil {
-                    posterView.alpha = 0.0
-                    posterView.image = image
-                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-                        posterView.alpha = 1.0
-                    })
-                } else {
-                    posterView.image = image
-                }
-            },
-            failure: { (imageRequest, imageResponse, error) -> Void in
-                self.networkErrorView.hidden = false
-        })
-    }
-
 
     // MARK: - Navigation
 

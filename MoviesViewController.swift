@@ -193,11 +193,11 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         if viewType == LIST_VIEW {
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
-            movie = movies[indexPath!.row]
+            movie = filtered[indexPath!.row]
         } else {
             let cell = sender as! UICollectionViewCell
             let indexPath = collectionView.indexPathForCell(cell)
-            movie = movies[indexPath!.row]
+            movie = filtered[indexPath!.row]
         }
         detailViewController.movie = movie
     }

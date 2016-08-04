@@ -175,9 +175,29 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     private func setPosterImage(posterPath: String, posterView: UIImageView) {
+        
         let baseImageUrl = "http://image.tmdb.org/t/p/w500"
-        let imageUrl = NSURL(string: baseImageUrl + posterPath)
-        posterView.setImageWithURL(imageUrl!)
+        let imageRequest = NSURLRequest(URL: NSURL(string: baseImageUrl + posterPath)!)
+        
+        posterView.setImageWithURLRequest(
+            imageRequest,
+            placeholderImage: nil,
+            success: { (imageRequest, imageResponse, image) -> Void in
+                
+                // imageResponse will be nil if the image is cached
+                if imageResponse != nil {
+                    posterView.alpha = 0.0
+                    posterView.image = image
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        posterView.alpha = 1.0
+                    })
+                } else {
+                    posterView.image = image
+                }
+            },
+            failure: { (imageRequest, imageResponse, error) -> Void in
+                self.networkErrorView.hidden = false
+        })
     }
 
 

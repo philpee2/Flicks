@@ -80,7 +80,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieGridCell", forIndexPath: indexPath) as! MovieGridCell
-        let movie = movies[indexPath.row]
+        let movie = filtered[indexPath.row]
         
         if let posterPath = (movie["poster_path"] as? String) {
             setPosterImage(posterPath, posterView: cell.posterImageView)

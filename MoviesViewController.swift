@@ -118,6 +118,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         cell.overviewLabel.text = movie["overview"] as? String
         return cell
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    // Private stuff
 
     private func updateMoviesData(movies: [NSDictionary], searchText: String) {
         self.movies = movies

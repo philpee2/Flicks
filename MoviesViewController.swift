@@ -65,6 +65,16 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         updateMoviesData(movies, searchText: searchText)
     }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.endEditing(true)
+        searchBar.text = ""
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
 
     private func updateMoviesData(movies: [NSDictionary], searchText: String) {
         self.movies = movies

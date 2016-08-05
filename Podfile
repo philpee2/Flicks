@@ -6,6 +6,7 @@ target 'Flicks' do
   use_frameworks!
     pod 'AFNetworking'
     pod 'MBProgressHUD'
+    pod 'YouTubePlayer'
 
   # Pods for Flicks
 

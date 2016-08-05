@@ -53,3 +53,19 @@ func setImage(posterPath: String, posterView: UIImageView) {
         failure: { (request, response, error) -> Void in
     })
 }
+
+func fetchDataHelper(url: String, completionHandler: (NSData?, NSURLResponse?, NSError?) -> Void) {
+    let request = NSURLRequest(
+        URL: NSURL(string: url)!,
+        cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData,
+        timeoutInterval: 10)
+    
+    let session = NSURLSession(
+        configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
+        delegate: nil,
+        delegateQueue: NSOperationQueue.mainQueue()
+    )
+    
+    let task: NSURLSessionDataTask = session.dataTaskWithRequest(request, completionHandler: completionHandler)
+    task.resume()
+}

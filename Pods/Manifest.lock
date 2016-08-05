@@ -15,15 +15,18 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - MBProgressHUD (1.0.0)
+  - YouTubePlayer (0.3.0)
 
 DEPENDENCIES:
   - AFNetworking
   - MBProgressHUD
+  - YouTubePlayer
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  YouTubePlayer: 88713a96c356f2c88da8925eb61438eda88bcd57
 
-PODFILE CHECKSUM: 79bf644ec5b6d92034256fc5936a8022b113d14e
+PODFILE CHECKSUM: e4ea6cb07dfc8bfb59216a491076752cc72197dd
 
 COCOAPODS: 1.0.1

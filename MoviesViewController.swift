@@ -145,20 +145,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     @objc private func fetchData(refreshControl: UIRefreshControl) {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = NSURL(string: "https://api.themoviedb.org/3/movie/\(endpoint)?api_key=\(apiKey)")
-        let request = NSURLRequest(
-            URL: url!,
-            cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData,
-            timeoutInterval: 10)
-
-        let session = NSURLSession(
-            configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
-            delegate: nil,
-            delegateQueue: NSOperationQueue.mainQueue()
-        )
-
-        let task: NSURLSessionDataTask = session.dataTaskWithRequest(request,
-             completionHandler: { (dataOrNil, response, error) in
+        let url = "https://api.themoviedb.org/3/movie/\(endpoint)?api_key=\(apiKey)"
+        fetchDataHelper(url,
+            completionHandler: { (dataOrNil, response, error) in
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
                 refreshControl.endRefreshing()
                 if error != nil {
@@ -172,7 +161,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                     }
                 }
         })
-        task.resume()
     }
 
     override func didReceiveMemoryWarning() {

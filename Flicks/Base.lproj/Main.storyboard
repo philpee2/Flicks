@@ -22,7 +22,7 @@
                                         <rect key="frame" x="0.0" y="92" width="320" height="143"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ldb-lR-NW4" id="TjZ-AC-A8n">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="143"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="142.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="brO-op-Cb1">
@@ -141,6 +141,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="PHO-K2-SBO">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                     <view alpha="0.80000000000000004" contentMode="scaleToFill" id="he1-5M-NfX">
                                         <rect key="frame" x="0.0" y="568" width="320" height="231"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -162,10 +166,11 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="PHO-K2-SBO">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                    <view contentMode="scaleToFill" id="Ri0-Le-pE1" customClass="YouTubePlayerView" customModule="YouTubePlayer">
+                                        <rect key="frame" x="0.0" y="366" width="320" height="202"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -178,6 +183,7 @@
                         <outlet property="posterImageView" destination="PHO-K2-SBO" id="rzj-2Y-avi"/>
                         <outlet property="scrollView" destination="ADA-93-fS5" id="jwO-aB-qoQ"/>
                         <outlet property="titleLabel" destination="Vef-E9-qgX" id="XVb-9o-E5i"/>
+                        <outlet property="videoView" destination="Ri0-Le-pE1" id="0qh-Vs-61d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KUK-DE-nyF" userLabel="First Responder" sceneMemberID="firstResponder"/>

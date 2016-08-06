@@ -27,10 +27,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     var filtered: [NSDictionary] {
         if let movies = movies {
-            return movies.filter { (movie) -> Bool in
-                let title = (movie["title"] as? String)?.lowercaseString ?? ""
-                let search = searchText.lowercaseString
-                return (search.characters.count == 0) || title.rangeOfString(search) != nil
+            return searchText.isEmpty ? movies : movies.filter { (movie) -> Bool in
+                let title = (movie["title"] as? String) ?? ""
+                return title.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
             }
         } else {
             return []

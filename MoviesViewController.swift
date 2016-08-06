@@ -60,7 +60,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         // Do any additional setup after loading the view.
     }
     
-    // Search bar methods
+    // MARK: - Search bar
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         updateMoviesData(movies, searchText: searchText)
@@ -77,7 +77,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         searchBar.showsCancelButton = true
     }
     
-    // Collection view methods
+    // MARK: - Collection view
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filtered.count
@@ -101,7 +101,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         return CGSize(width: width, height: height)
     }
     
-    // Table view methods
+    // MARK: - Table view
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filtered.count
@@ -123,7 +123,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    // Private stuff
+    // MARK: - Private
 
     private func updateMoviesData(movies: [NSDictionary], searchText: String) {
         self.movies = movies
@@ -186,6 +186,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         }
         detailViewController.movie = movie
     }
+    
+    // MARK: - Actions
+    
     @IBAction func viewTypeChanged(sender: AnyObject) {
         displayMovies(viewTypeControl.selectedSegmentIndex)
     }

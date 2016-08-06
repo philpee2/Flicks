@@ -165,8 +165,15 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PSC-EU-HAS">
+                                                <rect key="frame" x="12" y="38" width="200" height="15"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Huv-Uu-jTy">
-                                                <rect key="frame" x="12" y="45" width="300" height="21"/>
+                                                <rect key="frame" x="12" y="53" width="300" height="180"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -187,6 +194,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="sHl-JA-w0D"/>
                     <connections>
+                        <outlet property="dateLabel" destination="PSC-EU-HAS" id="fmv-G7-uPN"/>
                         <outlet property="infoView" destination="he1-5M-NfX" id="Bjq-TY-D5w"/>
                         <outlet property="overviewLabel" destination="Huv-Uu-jTy" id="P3E-Ve-W8a"/>
                         <outlet property="posterImageView" destination="PHO-K2-SBO" id="rzj-2Y-avi"/>

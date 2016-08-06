@@ -80,3 +80,7 @@ func formatDate(dateString: String, inputFormat: String, outputFormat: String) -
     dateFormatter.timeZone = NSTimeZone(name: "UTC")
     return dateFormatter.stringFromDate(date!)
 }
+
+func formatDateFromResponse(dateString: String) -> String {
+    return formatDate(dateString, inputFormat: "YYYY-MM-DD", outputFormat: "MM/DD/YYYY")
+}

@@ -13,6 +13,7 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var infoView: UIView!
@@ -65,6 +66,10 @@ class DetailViewController: UIViewController {
         videoView.frame.origin.y = infoView.frame.origin.y + infoView.frame.size.height
         titleLabel.text = movie["title"] as? String
         overviewLabel.text = movie["overview"] as? String
+        let releaseDate = movie["release_date"] as? String
+        if let releaseDate = releaseDate {
+            dateLabel.text = formatDateFromResponse(releaseDate)
+        }
         overviewLabel.sizeToFit()
         if let posterPath = movie["poster_path"] as? String {
             setImage(posterPath, posterView: posterImageView)

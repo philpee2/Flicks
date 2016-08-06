@@ -76,6 +76,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         searchBar.showsCancelButton = true
     }
     
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.endEditing(true)
+        updateMoviesData(movies, searchText: searchBar.text!)
+    }
+    
     // MARK: - Collection view
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

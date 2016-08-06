@@ -172,8 +172,15 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kag-0p-YeW">
+                                                <rect key="frame" x="90" y="38" width="60" height="15"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Huv-Uu-jTy">
-                                                <rect key="frame" x="12" y="53" width="300" height="180"/>
+                                                <rect key="frame" x="12" y="55" width="300" height="180"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -198,6 +205,7 @@
                         <outlet property="infoView" destination="he1-5M-NfX" id="Bjq-TY-D5w"/>
                         <outlet property="overviewLabel" destination="Huv-Uu-jTy" id="P3E-Ve-W8a"/>
                         <outlet property="posterImageView" destination="PHO-K2-SBO" id="rzj-2Y-avi"/>
+                        <outlet property="runTimeLabel" destination="kag-0p-YeW" id="h8f-Ce-wWt"/>
                         <outlet property="scrollView" destination="ADA-93-fS5" id="jwO-aB-qoQ"/>
                         <outlet property="titleLabel" destination="Vef-E9-qgX" id="XVb-9o-E5i"/>
                         <outlet property="videoView" destination="Ri0-Le-pE1" id="0qh-Vs-61d"/>

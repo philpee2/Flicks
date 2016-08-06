@@ -9,6 +9,9 @@
 import UIKit
 import YouTubePlayer
 
+let baseUrl = "https://api.themoviedb.org/3/movie/"
+let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var posterImageView: UIImageView!
@@ -18,13 +21,21 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var videoView: YouTubePlayerView!
+    @IBOutlet weak var runTimeLabel: UILabel!
 
     var movie: NSDictionary!
     var trailerYoutubeId: String?
+    
+    var movieId: Int {
+        return movie["id"] as! Int
+    }
 
     var movieTrailerUrl: String {
-        let id = movie["id"] as! Int
-        return "http://api.themoviedb.org/3/movie/\(id)/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"
+        return "\(baseUrl)\(movieId)/videos?api_key=\(apiKey)"
+    }
+    
+    var movieDetailsUrl: String {
+        return "\(baseUrl)\(movieId)?api_key=\(apiKey)"
     }
 
     private func fetchTrailer() {
@@ -44,9 +55,24 @@ class DetailViewController: UIViewController {
                                 self.videoView.hidden = true
                             }
                             self.setScrollViewSize()
-                            
                         }
                     }
+                }
+            }
+        )
+    }
+    
+    private func fetchMovieDetails() {
+        fetchDataHelper(movieDetailsUrl,
+            completionHandler: { (dataOrNil, response, error) in
+                if let data = dataOrNil {
+                    if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
+                        data, options:[]) as? NSDictionary {
+                            let movieRunTime = responseDictionary["runtime"] as? Int
+                            if let movieRunTime = movieRunTime {
+                                self.runTimeLabel.text = "\(movieRunTime)min"
+                            }
+                        }
                 }
             }
         )
@@ -75,6 +101,7 @@ class DetailViewController: UIViewController {
             setImage(posterPath, posterView: posterImageView)
         }
         fetchTrailer()
+        fetchMovieDetails()
     
 
         // Do any additional setup after loading the view.

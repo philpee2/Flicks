@@ -69,3 +69,14 @@ func fetchDataHelper(url: String, completionHandler: (NSData?, NSURLResponse?, N
     let task: NSURLSessionDataTask = session.dataTaskWithRequest(request, completionHandler: completionHandler)
     task.resume()
 }
+
+func formatDate(dateString: String, inputFormat: String, outputFormat: String) -> String {
+    // Copied from http://stackoverflow.com/a/32104865/4318086
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = inputFormat
+    let date = dateFormatter.dateFromString(dateString)
+    
+    dateFormatter.dateFormat = outputFormat
+    dateFormatter.timeZone = NSTimeZone(name: "UTC")
+    return dateFormatter.stringFromDate(date!)
+}

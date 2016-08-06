@@ -116,6 +116,10 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         cell.titleLabel.text = movie["title"] as? String
         cell.overviewLabel.text = movie["overview"] as? String
+        let releaseDate = movie["release_date"] as? String
+        if let releaseDate = releaseDate {
+            cell.dateLabel.text = formatDate(releaseDate, inputFormat: "YYYY-MM-DD", outputFormat: "YYYY")
+        }
         return cell
     }
     

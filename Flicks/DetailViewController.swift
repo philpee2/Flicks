@@ -70,7 +70,9 @@ class DetailViewController: UIViewController {
                         data, options:[]) as? NSDictionary {
                             let movieRunTime = responseDictionary["runtime"] as? Int
                             if let movieRunTime = movieRunTime {
-                                self.runTimeLabel.text = "\(movieRunTime)min"
+                                if movieRunTime > 0 {
+                                    self.runTimeLabel.text = "\(movieRunTime)min"
+                                }
                             }
                         }
                 }
